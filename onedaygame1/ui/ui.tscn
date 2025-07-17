@@ -1,0 +1,101 @@
+[gd_scene load_steps=7 format=3 uid="uid://bpb3v4c0qkbr1"]
+
+[ext_resource type="Script" uid="uid://cevi5x8dy45iy" path="res://ui/ui.gd" id="1_ks8t7"]
+[ext_resource type="Texture2D" uid="uid://beu7sfcij1gec" path="res://assets/textures/keyboard_space_outline.png" id="1_nb4k0"]
+[ext_resource type="FontFile" uid="uid://wqh07vkntccx" path="res://assets/fonts/C&C Red Alert [INET].ttf" id="2_wl5ax"]
+[ext_resource type="Theme" uid="uid://3hnfxahvtic2" path="res://assets/resources/ui.tres" id="4_vkava"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wl5ax"]
+font = ExtResource("2_wl5ax")
+font_size = 28
+
+[sub_resource type="LabelSettings" id="LabelSettings_vkava"]
+font = ExtResource("2_wl5ax")
+font_size = 32
+
+[node name="Ui" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ks8t7")
+
+[node name="JumpPrompt" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -69.0
+offset_top = -64.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="JumpLabel" type="Label" parent="JumpPrompt"]
+layout_mode = 2
+text = "Jump:"
+label_settings = SubResource("LabelSettings_wl5ax")
+
+[node name="TextureRect" type="TextureRect" parent="JumpPrompt"]
+layout_mode = 2
+texture = ExtResource("1_nb4k0")
+
+[node name="RetryPrompt" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RetryButton" type="Button" parent="RetryPrompt"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("4_vkava")
+text = "Retry"
+
+[node name="ExitButton2" type="Button" parent="RetryPrompt"]
+layout_mode = 2
+theme = ExtResource("4_vkava")
+text = "Exit
+"
+
+[node name="WinPrompt" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WinLabel" type="Label" parent="WinPrompt"]
+layout_mode = 2
+text = "You escaped!"
+label_settings = SubResource("LabelSettings_vkava")
+
+[node name="ExitButton" type="Button" parent="WinPrompt"]
+layout_mode = 2
+text = "Exit
+"
+
+[connection signal="pressed" from="RetryPrompt/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="RetryPrompt/ExitButton2" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="WinPrompt/ExitButton" to="." method="_on_exit_button_pressed"]
